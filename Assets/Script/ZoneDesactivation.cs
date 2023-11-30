@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZoneDesactivation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Liste des objets à désactiver
+    public GameObject[] objetsADesactiver;
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider other)
     {
-        
+        // Vérifie si le joueur entre dans la zone
+        if (other.CompareTag("Player"))
+        {
+            // Désactive chaque objet dans la liste
+            foreach (GameObject objet in objetsADesactiver)
+            {
+                if (objet != null)
+                {
+                    objet.SetActive(false);
+                    Debug.Log("Objet désactivé : " + objet.name);
+                }
+            }
+        }
     }
 }
